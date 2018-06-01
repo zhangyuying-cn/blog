@@ -1,20 +1,15 @@
 <template>
   <div class="container-fluid">
     <button @click="editBlog">开始编辑</button>
-    <div class="row">
-      <div class="col">
-        {{ text.title }}
-      </div>
-      <div class="col">
-        分类：{{ text.type }}
-      </div>
-    </div>
+    <show-blog-title></show-blog-title>
   </div>
 </template>
 
 <script>
+import ShowBlogTitle from './bolg/showBlogTitle'
 export default {
   name: 'HomePage',
+
   data () {
     return {
       text: {
@@ -29,7 +24,8 @@ export default {
         path: '/editBlog'
       })
     }
-  }
+  },
+  components: { ShowBlogTitle }
 }
 </script>
 
