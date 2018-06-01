@@ -10,10 +10,18 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "mock": "./node_modules/.bin/json-server --port 14579 -w mock/data.json mock/sub-organ.json --routes mock/routes.json"
   },
   "dependencies": {
+    "bootstrap": "^4.1.1",
+    "jquery": "^3.3.1",
+    "json-server": "^0.12.2",
+    "mavon-editor": "^2.6.4",
+    "popper.js": "^1.14.3",
+    "prettier": "^1.12.1",
     "vue": "^2.5.2",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
