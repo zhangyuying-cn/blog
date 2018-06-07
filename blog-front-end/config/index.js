@@ -12,12 +12,19 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/blog-api/*': {
-        target: 'http://localhost:14579',
+        target: 'http://172.16.192.97:6789',
         // pathRewrite: {
         //   "^/uim-api/": "/"
         // },
         secure: false
       }
+      // '/blog-api/*': {
+      //   target: 'http://localhost:14579',
+      //   // pathRewrite: {
+      //   //   "^/uim-api/": "/"
+      //   // },
+      //   secure: false
+      // }
     },
 
     // Various Dev Server settings

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zyy.blog.blogapi.dao.mybatis.BlogMapper">
+
+    <resultMap id="blog" type="com.zyy.blog.blogapi.bean.Blog">
+        <id property="id" column="c_id"/>
+        <result property="blog" column="c_blog"/>
+        <result property="title" column="c_title"/>
+        <result property="tag" column="c_tag"/>
+        <result property="category" column="c_category"/>
+        <result property="readersNumber" column="n_readersnumber"/>
+        <result property="updateTime" column="d_updatetime"/>
+        <result property="createTime" column="d_createtime"/>
+    </resultMap>
+
+    <select id="getAllBlog" resultMap="blog">
+        select
+        c_id,c_blog,c_title,c_tag,n_readersnumber,c_category,d_updatetime,d_createtime
+        from
+        t_blog
+    </select>
+
+    <select id="getBlogById" resultMap="blog">
+        select
+       	c_id,c_blog,c_title,c_tag,n_readersnumber,c_category,d_updatetime,d_createtime
+        from
+        t_blog where c_id=#{id}
+    </select>
+
+    <insert id="saveBlog"
+            parameterType="com.zyy.blog.blogapi.bean.Blog">
+        insert into t_blog (c_id,c_blog,
+        c_title,c_tag,n_readersnumber,c_category,d_updatetime,d_createtime)
+        values
+        (#{blog.id}, #{blog.blog}, #{blog.title}, #{blog.tag}, #{blog.readersNumber}, #{blog.category},
+        #{blog.updateTime},#{blog.createTime})
+    </insert>
+
+    <delete id="deleteBlogById" parameterType="java.lang.String">
+    delete from t_blog where c_id = #{id}
+    </delete>
+
+    <update id="updateBlog">
+        UPDATE t_blog
+        SET
+        c_id =#{blog.id},
+        c_blog =#{blog.blog},
+        c_title=#{blog.title},
+        c_tag =#{blog.tag},
+        n_readersnumber =#{blog.readersNumber},
+        c_category =#{blog.category},
+        d_updatetime=#{blog.updateTime},
+        WHERE c_id = #{id}
+    </update>
+
+
+</mapper>

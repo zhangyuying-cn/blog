@@ -2,8 +2,17 @@ const path = {
 
   context: 'blog-api',
 
-  getBlog: 'blog-api/api/text'
+  getAllBlog: 'blog-api/api/blogs',
+
+  getBlogById (id) {
+    return `blog-api/api/blogs/${id}`
+  },
+
+  saveBlog: 'blog-api/api/blogs'
+
 }
+
+// const reg = /^\"|\"$/g
 
 export {
   path

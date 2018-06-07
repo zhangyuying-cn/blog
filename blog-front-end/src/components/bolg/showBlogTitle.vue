@@ -1,12 +1,24 @@
 <template>
   <div>
-    <div class="show_blog_title" v-for="value in values">
-      <mavon-editor  :value="value.title"   :toolbarsFlag="toolbarsFlag"   :subfield="subField" :defaultOpen="defaultOpen"/>
+    <div class="m-1" v-for="(blog,index) in allBlogs"
+         :key="index">
+      <div class="mb-5 border-bottom">
+        <h5 @click="showOneBlog(blog.id)"> {{ blog.title }}</h5>
+        <div class="text-truncate text-justify"> &nbsp;&nbsp;&nbsp;&nbsp;{{
+                                                 blog.blog }}
+        </div>
+        <div class="text-secondary text-sm-left form-control-sm mt-1"
+             aria-label="Small">{{ blog.createTime }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import ShowOneBlog from './ShowOneBlog'
+import * as apiService from '../../services/apiService'
+
 export default {
   name: 'showBlogTitle',
   data () {
@@ -14,19 +26,35 @@ export default {
       toolbarsFlag: false,
       subField: false,
       defaultOpen: 'preview',
-      values: [
-        {title: '<h5> 深入理解java虚拟机</h5>'},
-        {title: '* java编程思想'},
-        {title: '* java并发编程'}
-      ]
+      allBlogs: []
     }
+  },
+  methods: {
+    showOneBlog (currentBlogId) {
+      this.$router.push({
+        path: '/showOneBlog',
+        query: {
+          currentBlogId
+        }
+      })
+    }
+  },
+  created () {
+    apiService.getAllBlog().then((result) => {
+      if (result.data.status === 200) {
+        this.allBlogs.push(...result.data.data)
+      }
+    })
+  },
+  components: {
+    ShowOneBlog
   }
 }
 </script>
 
 <style scoped>
-.show_blog_title{
-  width:80%;
-  height:50px;
-}
+
+  .v-note-wrapper {
+    min-height: 100px;
+  }
 </style>
